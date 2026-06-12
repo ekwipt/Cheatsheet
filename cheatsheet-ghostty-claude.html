@@ -172,6 +172,97 @@
       font-family: 'JetBrains Mono', monospace;
     }
 
+    /* SIDEBAR NAVIGATION */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 220px;
+      height: 100vh;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 24px 0;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 0 12px;
+    }
+
+    .sidebar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 12px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 10px 12px;
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 13px;
+      transition: all 0.2s ease;
+      border-left: 3px solid transparent;
+    }
+
+    .sidebar-link:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-left-color: var(--blue);
+    }
+
+    .sidebar-link.active {
+      background: rgba(137, 180, 250, 0.1);
+      border-left-color: var(--blue);
+      color: var(--blue);
+    }
+
+    /* MAIN CONTENT WITH SIDEBAR */
+    body.has-sidebar {
+      padding-left: 220px;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        width: 180px;
+      }
+      body.has-sidebar {
+        padding-left: 180px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 0;
+      }
+      .sidebar-content {
+        flex-direction: row;
+        gap: 8px;
+        padding: 0 12px;
+        overflow-x: auto;
+      }
+      .sidebar-title {
+        display: none;
+      }
+      body.has-sidebar {
+        padding-left: 0;
+      }
+    }
+
     @media print {
       body { background: #fff; color: #000; padding: 20px; }
       :root {
@@ -181,10 +272,22 @@
       }
       kbd { background: #eee; }
       .prompt { background: #f9f9f9; }
+      .sidebar { display: none; }
     }
   </style>
 </head>
-<body>
+<body class="has-sidebar">
+
+<nav class="sidebar">
+  <div class="sidebar-content">
+    <div class="sidebar-title">Navigation</div>
+    <a href="index.html" class="sidebar-link">Home</a>
+    <a href="cheatsheet-ghostty-claude.html" class="sidebar-link active">Ghostty · Claude</a>
+    <!-- <a href="cheatsheet-example.html" class="sidebar-link">Example Page 3</a> -->
+    <!-- <a href="cheatsheet-example.html" class="sidebar-link">Example Page 4</a> -->
+    <!-- <a href="cheatsheet-example.html" class="sidebar-link">Example Page 5</a> -->
+  </div>
+</nav>
 
 <header>
   <h1>Quick Reference</h1>

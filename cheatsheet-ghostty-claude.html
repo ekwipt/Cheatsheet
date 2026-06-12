@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheatsheet — Ghostty · Claude Code · NotebookLM</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e10;
+      --surface:  #17171a;
+      --border:   #2a2a2f;
+      --text:     #e4e4e8;
+      --muted:    #6b6b78;
+      --green:    #a6e3a1;
+      --blue:     #89b4fa;
+      --mauve:    #cba6f7;
+      --peach:    #fab387;
+      --yellow:   #f9e2af;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 48px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .ghostty  .card-label { color: var(--green); }
+    .claude   .card-label { color: var(--blue); }
+    .nlm      .card-label { color: var(--mauve); }
+    .maintain .card-label { color: var(--peach); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr + tr td {
+      border-top: 1px solid var(--border);
+    }
+
+    td {
+      padding: 8px 0;
+      vertical-align: top;
+    }
+
+    td:first-child {
+      width: 55%;
+      padding-right: 16px;
+    }
+
+    kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: #22222a;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cmd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .nlm-prompts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .prompt {
+      background: #1e1e24;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--mauve);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .prompt em {
+      color: var(--mauve);
+      font-style: normal;
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 20px; }
+      :root {
+        --bg: #fff; --surface: #f5f5f5; --border: #ddd;
+        --text: #111; --muted: #666;
+        --green: #1a7a4a; --blue: #1a4a8a; --mauve: #6a3a9a; --peach: #8a4a1a;
+      }
+      kbd { background: #eee; }
+      .prompt { background: #f9f9f9; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Quick Reference</h1>
+  <p>Ghostty · Claude Code · NotebookLM MCP</p>
+</header>
+
+<div class="grid">
+
+  <!-- GHOSTTY PANELS -->
+  <div class="card ghostty">
+    <div class="card-label">Ghostty — Panels</div>
+    <table>
+      <tr><td><kbd>Cmd+D</kbd></td><td class="desc">Split right</td></tr>
+      <tr><td><kbd>Cmd+Shift+D</kbd></td><td class="desc">Split down</td></tr>
+      <tr><td><kbd>Cmd+Alt+←→↑↓</kbd></td><td class="desc">Move between panels</td></tr>
+      <tr><td><kbd>Cmd+Shift+F</kbd></td><td class="desc">Zoom panel fullscreen</td></tr>
+      <tr><td><kbd>Cmd+Shift+E</kbd></td><td class="desc">Equalise all panels</td></tr>
+      <tr><td><kbd>Cmd+W</kbd></td><td class="desc">Close panel</td></tr>
+    </table>
+  </div>
+
+  <!-- GHOSTTY TABS + MISC -->
+  <div class="card ghostty">
+    <div class="card-label">Ghostty — Tabs &amp; Misc</div>
+    <table>
+      <tr><td><kbd>Cmd+T</kbd></td><td class="desc">New tab</td></tr>
+      <tr><td><kbd>Cmd+Shift+←→</kbd></td><td class="desc">Switch tabs</td></tr>
+      <tr><td><kbd>Ctrl+`</kbd></td><td class="desc">Quick terminal (any app)</td></tr>
+      <tr><td><kbd>Cmd+Shift+,</kbd></td><td class="desc">Reload config</td></tr>
+      <tr><td><kbd>Cmd++</kbd> / <kbd>Cmd+-</kbd></td><td class="desc">Font size up / down</td></tr>
+      <tr><td><kbd>Cmd+0</kbd></td><td class="desc">Reset font size</td></tr>
+    </table>
+  </div>
+
+  <!-- CLAUDE CODE -->
+  <div class="card claude">
+    <div class="card-label">Claude Code</div>
+    <table>
+      <tr><td><kbd class="cmd">claude</kbd></td><td class="desc">Start Claude Code</td></tr>
+      <tr><td><kbd class="cmd">/mcp</kbd></td><td class="desc">Check MCP connections</td></tr>
+      <tr><td><kbd class="cmd">/help</kbd></td><td class="desc">All slash commands</td></tr>
+      <tr><td><kbd class="cmd">/login</kbd></td><td class="desc">Authenticate account</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td class="desc">Cancel current task</td></tr>
+      <tr><td><kbd>Ctrl+C</kbd></td><td class="desc">Force quit</td></tr>
+    </table>
+  </div>
+
+  <!-- MAINTENANCE -->
+  <div class="card maintain">
+    <div class="card-label">Maintenance</div>
+    <table>
+      <tr><td><kbd class="cmd">nlm login</kbd></td><td class="desc">Re-auth (every 2–4 weeks)</td></tr>
+      <tr><td><kbd class="cmd">nlm notebook list</kbd></td><td class="desc">List notebooks in terminal</td></tr>
+      <tr><td><kbd class="cmd">claude mcp list</kbd></td><td class="desc">Verify MCP connected</td></tr>
+      <tr><td><kbd class="cmd">uv tool upgrade notebooklm-mcp-cli</kbd></td><td class="desc">Update the tool</td></tr>
+    </table>
+  </div>
+
+  <!-- NOTEBOOKLM PROMPTS -->
+  <div class="card nlm wide">
+    <div class="card-label">NotebookLM — Say to Claude Code</div>
+    <div class="nlm-prompts">
+      <div class="prompt">List my NotebookLM notebooks</div>
+      <div class="prompt">Query my <em>[notebook name]</em> notebook about <em>[topic]</em></div>
+      <div class="prompt">Add this URL as a source to my <em>[notebook name]</em> notebook: <em>[url]</em></div>
+      <div class="prompt">Create a new notebook called <em>[name]</em></div>
+      <div class="prompt">Generate an audio overview for my <em>[notebook name]</em> notebook</div>
+      <div class="prompt">Search across all my notebooks for <em>[topic]</em></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  ~/.config/ghostty/config · console.anthropic.com · notebooklm.google.com
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheatsheets — Ben McCarthy</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e10;
+      --surface:  #17171a;
+      --border:   #2a2a2f;
+      --text:     #e4e4e8;
+      --muted:    #6b6b78;
+      --green:    #a6e3a1;
+      --blue:     #89b4fa;
+      --mauve:    #cba6f7;
+      --peach:    #fab387;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    header {
+      max-width: 800px;
+      margin: 0 auto 64px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    header h2 {
+      font-size: 36px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    header p {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .grid {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--text);
+      transform: translateY(-2px);
+    }
+
+    .card-icon {
+      font-size: 24px;
+      opacity: 0.6;
+    }
+
+    .card-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .card.primary {
+      border-color: var(--green);
+      background: rgba(166, 227, 161, 0.05);
+    }
+
+    .card.primary:hover {
+      border-color: var(--green);
+      box-shadow: 0 0 12px rgba(166, 227, 161, 0.1);
+    }
+
+    footer {
+      max-width: 800px;
+      margin: 48px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+
+    .empty {
+      text-align: center;
+      color: var(--muted);
+      padding: 20px;
+      font-size: 13px;
+    }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 20px; }
+      :root {
+        --bg: #fff; --surface: #f5f5f5; --border: #ddd;
+        --text: #111; --muted: #666; --green: #1a7a4a;
+      }
+      .card { border: 1px solid #ddd; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Reference</h1>
+  <h2>Cheatsheets</h2>
+  <p>Quick references for tools, terminals, and workflows</p>
+</header>
+
+<div class="grid">
+
+  <a href="/cheatsheet/ghostty-claude-notebooklm/" class="card primary">
+    <div class="card-icon">⌘</div>
+    <div class="card-title">Ghostty · Claude · NotebookLM</div>
+    <div class="card-desc">Terminal, IDE, and MCP shortcuts</div>
+  </a>
+
+  <!-- Template for more cheatsheets — uncomment and fill in -->
+  
+  <!-- <a href="/cheatsheet/obsidian/" class="card">
+    <div class="card-icon">🗂️</div>
+    <div class="card-title">Obsidian</div>
+    <div class="card-desc">Vault management and plugins</div>
+  </a>
+
+  <a href="/cheatsheet/git/" class="card">
+    <div class="card-icon">⎇</div>
+    <div class="card-title">Git</div>
+    <div class="card-desc">Common commands and workflows</div>
+  </a>
+
+  <a href="/cheatsheet/sales-meddpicc/" class="card">
+    <div class="card-icon">📊</div>
+    <div class="card-title">MEDDPICC Framework</div>
+    <div class="card-desc">Sales training quick reference</div>
+  </a> -->
+
+</div>
+
+<footer>
+  Add more cheatsheets by creating new folders in the repo · Last updated: June 2026
+</footer>
+
+</body>
+</html>

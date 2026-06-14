@@ -34,40 +34,79 @@
 
     header {
       max-width: 900px;
-      margin: 0 auto 48px;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 24px;
+      margin: 0 auto 40px;
     }
 
     header h1 {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 8px;
+      margin-bottom: 20px;
     }
 
     header p {
       font-size: 22px;
       font-weight: 600;
       color: var(--text);
+      margin-bottom: 24px;
     }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .nav a.active {
+      color: var(--text);
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 4px;
+    }
+
+    .colored-title {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .colored-title span {
+      font-weight: 600;
+    }
+
+    .ghostty-title { color: var(--green); }
+    .claude-title { color: var(--blue); }
+    .nlm-title { color: var(--mauve); }
 
     .grid {
       max-width: 900px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 24px;
+      padding: 20px;
     }
 
     .card.wide {
@@ -80,7 +119,7 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -163,21 +202,7 @@
       font-style: normal;
     }
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 24px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      color: var(--blue);
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    .back-link:hover {
-      color: var(--text);
-    }
-
-    footer {
+footer {
       max-width: 900px;
       margin: 40px auto 0;
       text-align: center;
@@ -200,13 +225,19 @@
 </head>
 <body>
 
-<div style="max-width: 900px; margin: 0 auto;">
-  <a href="../" class="back-link">← Back to Cheatsheets</a>
-</div>
-
 <header>
-  <h1>Quick Reference</h1>
-  <p>Ghostty · Claude Code · NotebookLM MCP</p>
+  <h1>Index</h1>
+  <div class="nav">
+    <a href="../../">Cheatsheets</a>
+    <a href="./" class="active">Ghostty · Claude · NotebookLM</a>
+  </div>
+  <p class="colored-title">
+    <span class="ghostty-title">Ghostty</span>
+    <span>·</span>
+    <span class="claude-title">Claude Code</span>
+    <span>·</span>
+    <span class="nlm-title">NotebookLM MCP</span>
+  </p>
 </header>
 
 <div class="grid">

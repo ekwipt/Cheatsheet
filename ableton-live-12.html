@@ -26,55 +26,69 @@
       line-height: 1.6;
       min-height: 100vh;
       padding: 48px 24px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    header {
-      max-width: 900px;
-      margin: 0 auto 40px;
+    .sidebar {
+      position: sticky;
+      top: 48px;
+      height: fit-content;
     }
 
-    header h1 {
+    .nav-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 12px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 20px;
-    }
-
-    header p {
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 24px;
-    }
-
-    .nav {
-      display: flex;
-      gap: 24px;
+      margin-bottom: 12px;
+      padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 16px;
-      margin-bottom: 24px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-links a {
       font-family: 'JetBrains Mono', monospace;
       font-size: 12px;
-      flex-wrap: wrap;
-    }
-
-    .nav a {
       color: var(--muted);
       text-decoration: none;
       transition: color 0.2s ease;
+      padding: 4px 0;
     }
 
-    .nav a:hover {
+    .nav-links a:hover {
       color: var(--text);
     }
 
-    .nav a.active {
+    .nav-links a.active {
       color: var(--text);
-      border-bottom: 2px solid var(--orange);
-      padding-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
     }
 
     .colored-title {
@@ -178,15 +192,20 @@
 </head>
 <body>
 
-<header>
-  <h1>Index</h1>
-  <div class="nav">
-    <a href="./index.html">Cheatsheets</a>
+<div class="sidebar">
+  <div class="nav-title">Navigation</div>
+  <div class="nav-links">
+    <a href="./index.html">Index</a>
     <a href="./ghostty-claude-notebooklm.html">Ghostty · Claude · NotebookLM</a>
     <a href="./ableton-live-12.html" class="active">Ableton Live 12</a>
   </div>
-  <p class="colored-title">Ableton Live 12</p>
-</header>
+</div>
+
+<div class="content">
+  <header>
+    <h2>Ableton Live 12</h2>
+    <p class="colored-title">Ableton Live 12</p>
+  </header>
 
 <div class="grid">
 
@@ -286,6 +305,7 @@
 <footer>
   live.ableton.com · Keyboard shortcuts for macOS · Ableton Live 12
 </footer>
+</div>
 
 </body>
 </html>

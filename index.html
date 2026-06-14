@@ -18,7 +18,7 @@
       --green:    #a6e3a1;
       --blue:     #89b4fa;
       --mauve:    #cba6f7;
-      --peach:    #fab387;
+      --orange:   #f7a072;
     }
 
     body {
@@ -29,43 +29,79 @@
       line-height: 1.6;
       min-height: 100vh;
       padding: 48px 24px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
-    header {
-      max-width: 800px;
-      margin: 0 auto 64px;
-      text-align: center;
+    .sidebar {
+      position: sticky;
+      top: 48px;
+      height: fit-content;
     }
 
-    header h1 {
+    .nav-title {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 11px;
+      font-weight: 700;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      padding: 4px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      margin-bottom: 48px;
     }
 
     header h2 {
-      font-size: 36px;
+      font-size: 32px;
       font-weight: 600;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       color: var(--text);
     }
 
     header p {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--muted);
-      max-width: 500px;
-      margin: 0 auto;
     }
 
     .grid {
-      max-width: 800px;
-      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 16px;
     }
 
@@ -116,9 +152,18 @@
       box-shadow: 0 0 12px rgba(166, 227, 161, 0.1);
     }
 
+    .card.secondary {
+      border-color: var(--orange);
+      background: rgba(247, 160, 114, 0.05);
+    }
+
+    .card.secondary:hover {
+      border-color: var(--orange);
+      box-shadow: 0 0 12px rgba(247, 160, 114, 0.1);
+    }
+
     footer {
-      max-width: 800px;
-      margin: 48px auto 0;
+      margin-top: 48px;
       text-align: center;
       font-size: 12px;
       color: var(--muted);
@@ -127,18 +172,22 @@
       padding-top: 24px;
     }
 
-    .empty {
-      text-align: center;
-      color: var(--muted);
-      padding: 20px;
-      font-size: 13px;
+    @media (max-width: 768px) {
+      body {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .sidebar {
+        position: static;
+      }
     }
 
     @media print {
-      body { background: #fff; color: #000; padding: 20px; }
+      body { background: #fff; color: #000; padding: 20px; grid-template-columns: 1fr; }
       :root {
         --bg: #fff; --surface: #f5f5f5; --border: #ddd;
-        --text: #111; --muted: #666; --green: #1a7a4a;
+        --text: #111; --muted: #666; --green: #1a7a4a; --orange: #d97706;
       }
       .card { border: 1px solid #ddd; }
     }
@@ -146,45 +195,39 @@
 </head>
 <body>
 
-<header>
-  <h1>Reference</h1>
-  <h2>Cheatsheets</h2>
-  <p>Quick references for tools, terminals, and workflows</p>
-</header>
-
-<div class="grid">
-
-  <a href="./ghostty-claude-notebooklm/" class="card primary">
-    <div class="card-icon">⌘</div>
-    <div class="card-title">Ghostty · Claude · NotebookLM</div>
-    <div class="card-desc">Terminal, IDE, and MCP shortcuts</div>
-  </a>
-
-  <!-- Template for more cheatsheets — uncomment and fill in -->
-  
-  <!-- <a href="/cheatsheet/obsidian/" class="card">
-    <div class="card-icon">🗂️</div>
-    <div class="card-title">Obsidian</div>
-    <div class="card-desc">Vault management and plugins</div>
-  </a>
-
-  <a href="/cheatsheet/git/" class="card">
-    <div class="card-icon">⎇</div>
-    <div class="card-title">Git</div>
-    <div class="card-desc">Common commands and workflows</div>
-  </a>
-
-  <a href="/cheatsheet/sales-meddpicc/" class="card">
-    <div class="card-icon">📊</div>
-    <div class="card-title">MEDDPICC Framework</div>
-    <div class="card-desc">Sales training quick reference</div>
-  </a> -->
-
+<div class="sidebar">
+  <div class="nav-title">Navigation</div>
+  <div class="nav-links">
+    <a href="./" class="active">Index</a>
+    <a href="./ghostty-claude-notebooklm/">Ghostty · Claude · NotebookLM</a>
+    <a href="./ableton-live-12/">Ableton Live 12</a>
+  </div>
 </div>
 
-<footer>
-  Add more cheatsheets by creating new folders in the repo · Last updated: June 2026
-</footer>
+<div class="content">
+  <header>
+    <h2>Cheatsheets</h2>
+    <p>Quick references for tools, terminals, and workflows</p>
+  </header>
+
+  <div class="grid">
+    <a href="./ghostty-claude-notebooklm/" class="card primary">
+      <div class="card-icon">⌘</div>
+      <div class="card-title">Ghostty · Claude · NotebookLM</div>
+      <div class="card-desc">Terminal, IDE, and MCP shortcuts</div>
+    </a>
+
+    <a href="./ableton-live-12/" class="card secondary">
+      <div class="card-icon">🎚️</div>
+      <div class="card-title">Ableton Live 12</div>
+      <div class="card-desc">Production, editing, and mixing shortcuts</div>
+    </a>
+  </div>
+
+  <footer>
+    Add more cheatsheets by creating new folders in the repo · Last updated: June 2026
+  </footer>
+</div>
 
 </body>
 </html>

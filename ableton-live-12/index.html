@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheatsheet — Ableton Live 12</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e10;
+      --surface:  #17171a;
+      --border:   #2a2a2f;
+      --text:     #e4e4e8;
+      --muted:    #6b6b78;
+      --orange:   #f7a072;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 48px 24px;
+    }
+
+    header {
+      max-width: 900px;
+      margin: 0 auto 40px;
+    }
+
+    header h1 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    header p {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 24px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+    }
+
+    .nav a.active {
+      color: var(--text);
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 4px;
+    }
+
+    .colored-title {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    .grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange);
+    }
+
+    .card-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr + tr td {
+      border-top: 1px solid var(--border);
+    }
+
+    td {
+      padding: 8px 0;
+      vertical-align: top;
+    }
+
+    td:first-child {
+      width: 55%;
+      padding-right: 16px;
+    }
+
+    kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: #22222a;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 20px; }
+      :root {
+        --bg: #fff; --surface: #f5f5f5; --border: #ddd;
+        --text: #111; --muted: #666; --orange: #d97706;
+      }
+      kbd { background: #eee; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Index</h1>
+  <div class="nav">
+    <a href="../../">Cheatsheets</a>
+    <a href="../ghostty-claude-notebooklm/">Ghostty · Claude · NotebookLM</a>
+    <a href="./" class="active">Ableton Live 12</a>
+  </div>
+  <p class="colored-title">Ableton Live 12</p>
+</header>
+
+<div class="grid">
+
+  <!-- NAVIGATION & SELECTION -->
+  <div class="card">
+    <div class="card-label">Navigation & Selection</div>
+    <table>
+      <tr><td><kbd>Cmd+↑↓</kbd></td><td class="desc">Navigate tracks up/down</td></tr>
+      <tr><td><kbd>Cmd+←→</kbd></td><td class="desc">Scroll arrangement left/right</td></tr>
+      <tr><td><kbd>Cmd+Shift+A</kbd></td><td class="desc">Focus on arrangement view</td></tr>
+      <tr><td><kbd>Cmd+Shift+S</kbd></td><td class="desc">Focus on session view</td></tr>
+      <tr><td><kbd>Tab</kbd></td><td class="desc">Toggle sidebar</td></tr>
+      <tr><td><kbd>Cmd+Alt+I</kbd></td><td class="desc">Toggle info panel</td></tr>
+    </table>
+  </div>
+
+  <!-- ARRANGEMENT EDITING -->
+  <div class="card">
+    <div class="card-label">Arrangement Editing</div>
+    <table>
+      <tr><td><kbd>Cmd+D</kbd></td><td class="desc">Duplicate clip/track</td></tr>
+      <tr><td><kbd>Cmd+X</kbd></td><td class="desc">Cut clip</td></tr>
+      <tr><td><kbd>Cmd+C</kbd></td><td class="desc">Copy clip</td></tr>
+      <tr><td><kbd>Cmd+V</kbd></td><td class="desc">Paste clip</td></tr>
+      <tr><td><kbd>Delete</kbd></td><td class="desc">Delete clip</td></tr>
+      <tr><td><kbd>Cmd+Z</kbd></td><td class="desc">Undo last action</td></tr>
+    </table>
+  </div>
+
+  <!-- PLAYBACK & RECORDING -->
+  <div class="card">
+    <div class="card-label">Playback & Recording</div>
+    <table>
+      <tr><td><kbd>Space</kbd></td><td class="desc">Play/pause</td></tr>
+      <tr><td><kbd>Cmd+Shift+R</kbd></td><td class="desc">Record on selected track</td></tr>
+      <tr><td><kbd>Cmd+R</kbd></td><td class="desc">Global record</td></tr>
+      <tr><td><kbd>0</kbd></td><td class="desc">Jump to start</td></tr>
+      <tr><td><kbd>Enter</kbd></td><td class="desc">Capture recording</td></tr>
+      <tr><td><kbd>Cmd+.</kbd></td><td class="desc">Quantize clip</td></tr>
+    </table>
+  </div>
+
+  <!-- CLIP EDITING -->
+  <div class="card">
+    <div class="card-label">Clip Editing</div>
+    <table>
+      <tr><td><kbd>Double-click</kbd></td><td class="desc">Open clip editor</td></tr>
+      <tr><td><kbd>Cmd+B</kbd></td><td class="desc">Warp mode toggle</td></tr>
+      <tr><td><kbd>Cmd+E</kbd></td><td class="desc">Envelope editing</td></tr>
+      <tr><td><kbd>Shift+Drag</kbd></td><td class="desc">Change clip length</td></tr>
+      <tr><td><kbd>Cmd+L</kbd></td><td class="desc">Create audio loop</td></tr>
+      <tr><td><kbd>Ctrl+Drag</kbd></td><td class="desc">Stretch/compress clip</td></tr>
+    </table>
+  </div>
+
+  <!-- TRACK & DEVICE MANAGEMENT -->
+  <div class="card">
+    <div class="card-label">Track & Device Management</div>
+    <table>
+      <tr><td><kbd>Cmd+T</kbd></td><td class="desc">Create audio track</td></tr>
+      <tr><td><kbd>Cmd+Alt+T</kbd></td><td class="desc">Create MIDI track</td></tr>
+      <tr><td><kbd>Cmd+Shift+T</kbd></td><td class="desc">Create return track</td></tr>
+      <tr><td><kbd>Cmd+M</kbd></td><td class="desc">Solo/unsolo track</td></tr>
+      <tr><td><kbd>Alt+M</kbd></td><td class="desc">Mute track</td></tr>
+      <tr><td><kbd>Cmd+H</kbd></td><td class="desc">Hide device</td></tr>
+    </table>
+  </div>
+
+  <!-- SESSION & MIXING -->
+  <div class="card">
+    <div class="card-label">Session & Mixing</div>
+    <table>
+      <tr><td><kbd>Ctrl+Enter</kbd></td><td class="desc">Launch scene</td></tr>
+      <tr><td><kbd>Cmd+G</kbd></td><td class="desc">Group selected tracks</td></tr>
+      <tr><td><kbd>Cmd+Shift+G</kbd></td><td class="desc">Ungroup tracks</td></tr>
+      <tr><td><kbd>Cmd+Shift+M</kbd></td><td class="desc">Show/hide mixer</td></tr>
+      <tr><td><kbd>Alt+Drag fader</kbd></td><td class="desc">Reset parameter to default</td></tr>
+      <tr><td><kbd>Ctrl+Shift+F</kbd></td><td class="desc">Save device preset</td></tr>
+    </table>
+  </div>
+
+  <!-- WORKFLOW ESSENTIALS -->
+  <div class="card wide">
+    <div class="card-label">Workflow Essentials</div>
+    <table>
+      <tr><td><strong>Wavetable</strong></td><td class="desc">Advanced wavetable synth with morphing and modulation</td></tr>
+      <tr><td><strong>Sampler</strong></td><td class="desc">Full-featured sample manipulation and playback</td></tr>
+      <tr><td><strong>Operator</strong></td><td class="desc">FM synthesis for complex, evolving sounds</td></tr>
+      <tr><td><strong>Max for Live</strong></td><td class="desc">Create custom instruments and effects with Max</td></tr>
+      <tr><td><strong>Push 3</strong></td><td class="desc">Hands-on production, sequencing, and mixing controller</td></tr>
+      <tr><td><strong>Scale Settings</strong></td><td class="desc">Constrain MIDI to musical scales automatically</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<footer>
+  live.ableton.com · Keyboard shortcuts for macOS · Ableton Live 12
+</footer>
+
+</body>
+</html>

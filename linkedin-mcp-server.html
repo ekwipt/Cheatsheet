@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheatsheet — LinkedIn MCP Server</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0e0e10;
+      --surface:  #17171a;
+      --border:   #2a2a2f;
+      --text:     #e4e4e8;
+      --muted:    #6b6b78;
+      --green:    #a6e3a1;
+      --blue:     #89b4fa;
+      --mauve:    #cba6f7;
+      --peach:    #fab387;
+      --yellow:   #f9e2af;
+      --sky:      #74c7ec;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 48px 24px;
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 48px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 48px;
+      height: fit-content;
+    }
+
+    .nav-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+      padding: 4px 0;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-links a.active {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      margin-bottom: 40px;
+    }
+
+    header h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .colored-title {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .colored-title span {
+      font-weight: 600;
+    }
+
+    .linkedin-title { color: var(--blue); }
+    .mcp-title      { color: var(--sky); }
+
+    .grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .auth     .card-label { color: var(--green); }
+    .people   .card-label { color: var(--blue); }
+    .company  .card-label { color: var(--sky); }
+    .messaging .card-label { color: var(--mauve); }
+    .config   .card-label { color: var(--peach); }
+    .prompts  .card-label { color: var(--yellow); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    tr + tr td {
+      border-top: 1px solid var(--border);
+    }
+
+    td {
+      padding: 8px 0;
+      vertical-align: top;
+    }
+
+    td:first-child {
+      width: 55%;
+      padding-right: 16px;
+    }
+
+    kbd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      background: #22222a;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 6px;
+      white-space: nowrap;
+    }
+
+    .desc {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .cmd {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .prompts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .prompt {
+      background: #1e1e24;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--yellow);
+      border-radius: 6px;
+      padding: 10px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .prompt em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+
+    .desc code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--sky);
+      background: #22222a;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 1px 4px;
+    }
+
+    footer {
+      max-width: 900px;
+      margin: 40px auto 0;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    @media print {
+      body { background: #fff; color: #000; padding: 20px; }
+      :root {
+        --bg: #fff; --surface: #f5f5f5; --border: #ddd;
+        --text: #111; --muted: #666;
+        --green: #1a7a4a; --blue: #1a4a8a; --sky: #0e6a8a;
+        --mauve: #6a3a9a; --peach: #8a4a1a; --yellow: #7a5e00;
+      }
+      kbd { background: #eee; }
+      .prompt { background: #f9f9f9; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <div class="nav-title">Navigation</div>
+  <div class="nav-links">
+    <a href="./index.html">Index</a>
+    <a href="./ghostty-claude-notebooklm.html">Ghostty · Claude · NotebookLM</a>
+    <a href="./ableton-live-12.html">Ableton Live 12</a>
+    <a href="./linkedin-mcp-server.html" class="active">LinkedIn MCP Server</a>
+  </div>
+</div>
+
+<div class="content">
+  <header>
+    <h2>LinkedIn MCP Server</h2>
+    <p class="colored-title">
+      <span class="linkedin-title">LinkedIn</span>
+      <span>·</span>
+      <span class="mcp-title">MCP Server</span>
+    </p>
+  </header>
+
+  <div class="grid">
+
+    <!-- AUTH & SETUP -->
+    <div class="card auth">
+      <div class="card-label">Auth &amp; Setup</div>
+      <table>
+        <tr><td><kbd class="cmd">uvx mcp-server-linkedin@latest --login</kbd></td><td class="desc">First-time browser login &amp; save session</td></tr>
+        <tr><td><kbd class="cmd">--import-from-browser brave</kbd></td><td class="desc">Import session from existing browser (chrome, brave, arc, edge…)</td></tr>
+        <tr><td><kbd class="cmd">--status</kbd></td><td class="desc">Check if current session is valid</td></tr>
+        <tr><td><kbd class="cmd">--logout</kbd></td><td class="desc">Clear stored browser profile</td></tr>
+        <tr><td><kbd class="cmd">~/.linkedin-mcp/profile/</kbd></td><td class="desc">Persistent session storage location</td></tr>
+      </table>
+    </div>
+
+    <!-- CONFIG OPTIONS -->
+    <div class="card config">
+      <div class="card-label">Run Options</div>
+      <table>
+        <tr><td><kbd class="cmd">--no-headless</kbd></td><td class="desc">Show browser window for debugging</td></tr>
+        <tr><td><kbd class="cmd">--log-level DEBUG</kbd></td><td class="desc">Verbose logging (DEBUG / INFO / WARNING / ERROR)</td></tr>
+        <tr><td><kbd class="cmd">--transport streamable-http</kbd></td><td class="desc">HTTP mode instead of stdio</td></tr>
+        <tr><td><kbd class="cmd">--host 127.0.0.1 --port 8080</kbd></td><td class="desc">HTTP server host &amp; port</td></tr>
+        <tr><td><kbd class="cmd">--tool-timeout 180</kbd></td><td class="desc">Per-tool execution timeout (seconds)</td></tr>
+        <tr><td><kbd class="cmd">--viewport 1280x720</kbd></td><td class="desc">Browser viewport size</td></tr>
+      </table>
+    </div>
+
+    <!-- PEOPLE & PROFILES -->
+    <div class="card people">
+      <div class="card-label">People &amp; Profiles</div>
+      <table>
+        <tr><td><kbd class="cmd">get_person_profile</kbd></td><td class="desc">Profile info with explicit section selection (experience, education, interests, honors, languages, certifications, skills, projects, contact_info, posts)</td></tr>
+        <tr><td><kbd class="cmd">get_my_profile</kbd></td><td class="desc">Authenticated user's own LinkedIn profile (same sections as get_person_profile)</td></tr>
+        <tr><td><kbd class="cmd">connect_with_person</kbd></td><td class="desc">Send a connection request or accept an incoming one, with optional note</td></tr>
+        <tr><td><kbd class="cmd">get_sidebar_profiles</kbd></td><td class="desc">Extract profile URLs from sidebar sections ("More profiles for you", "Explore premium profiles", "People you may know") on a profile page</td></tr>
+        <tr><td><kbd class="cmd">search_people</kbd></td><td class="desc">Search by keywords, location, connection degree (1st/2nd/3rd), and current company</td></tr>
+      </table>
+    </div>
+
+    <!-- COMPANIES & JOBS -->
+    <div class="card company">
+      <div class="card-label">Companies &amp; Jobs</div>
+      <table>
+        <tr><td><kbd class="cmd">get_company_profile</kbd></td><td class="desc">Company info with section selection (posts, jobs); about-section may include a <code>company_urn</code> numeric id used by the <code>currentCompany</code> people-search facet</td></tr>
+        <tr><td><kbd class="cmd">get_company_posts</kbd></td><td class="desc">Get recent posts from a company's LinkedIn feed</td></tr>
+        <tr><td><kbd class="cmd">search_companies</kbd></td><td class="desc">Search for companies on LinkedIn by keywords</td></tr>
+        <tr><td><kbd class="cmd">get_company_employees</kbd></td><td class="desc">List employees at a company from the /people/ page, with optional keyword filter</td></tr>
+        <tr><td><kbd class="cmd">search_jobs</kbd></td><td class="desc">Search for jobs with keywords and location filters</td></tr>
+        <tr><td><kbd class="cmd">get_job_details</kbd></td><td class="desc">Get detailed information about a specific job posting</td></tr>
+      </table>
+    </div>
+
+    <!-- MESSAGING -->
+    <div class="card messaging">
+      <div class="card-label">Messaging &amp; Feed</div>
+      <table>
+        <tr><td><kbd class="cmd">get_inbox</kbd></td><td class="desc">List recent conversations from the LinkedIn messaging inbox</td></tr>
+        <tr><td><kbd class="cmd">get_conversation</kbd></td><td class="desc">Read a specific messaging conversation by username or thread ID</td></tr>
+        <tr><td><kbd class="cmd">search_conversations</kbd></td><td class="desc">Search messages by keyword</td></tr>
+        <tr><td><kbd class="cmd">send_message</kbd></td><td class="desc">Send a message to a LinkedIn user (requires confirmation)</td></tr>
+        <tr><td><kbd class="cmd">get_feed</kbd></td><td class="desc">Get recent posts from the authenticated user's home feed</td></tr>
+        <tr><td><kbd class="cmd">close_session</kbd></td><td class="desc">Close browser session and clean up resources</td></tr>
+      </table>
+    </div>
+
+    <!-- CLAUDE CODE CONFIG SNIPPET -->
+    <div class="card config">
+      <div class="card-label">Claude Desktop Config</div>
+      <table>
+        <tr>
+          <td colspan="2">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);line-height:1.7;background:#1e1e24;border:1px solid var(--border);border-radius:6px;padding:10px 14px;">
+              {<br>
+              &nbsp;&nbsp;"mcpServers": {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;"mcp-server-linkedin": {<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"command": "uvx",<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"args": ["mcp-server-linkedin@latest"],<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"env": { "UV_HTTP_TIMEOUT": "300" }<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+              &nbsp;&nbsp;}<br>
+              }
+            </div>
+          </td>
+        </tr>
+        <tr><td><kbd class="cmd">/mcp</kbd></td><td class="desc">Verify MCP is connected in Claude Code</td></tr>
+        <tr><td><kbd class="cmd">claude mcp list</kbd></td><td class="desc">List MCP servers from terminal</td></tr>
+      </table>
+    </div>
+
+    <!-- PROMPTS FOR CLAUDE -->
+    <div class="card prompts wide">
+      <div class="card-label">Say to Claude Code</div>
+      <div class="prompts-list">
+        <div class="prompt">Get the LinkedIn profile for <em>[linkedin.com/in/username]</em> including their experience and skills</div>
+        <div class="prompt">Search LinkedIn for people who work at <em>[company name]</em> in <em>[location]</em></div>
+        <div class="prompt">Find job postings for <em>[role title]</em> in <em>[location]</em> on LinkedIn</div>
+        <div class="prompt">Get the LinkedIn company profile for <em>[company name]</em> including their recent posts</div>
+        <div class="prompt">Search my LinkedIn messages for conversations about <em>[topic]</em></div>
+        <div class="prompt">Send a connection request to <em>[linkedin.com/in/username]</em> with the note: <em>[message]</em></div>
+        <div class="prompt">List the employees at <em>[company name]</em> who are in a <em>[role/keyword]</em> role</div>
+        <div class="prompt">Show me my LinkedIn home feed</div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    github.com/stickerdaniel/linkedin-mcp-server · linkedin.com · console.anthropic.com
+  </footer>
+</div>
+
+</body>
+</html>
